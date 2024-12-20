@@ -724,7 +724,7 @@
 (defn- apply-signal-exception
   "provide a more specific exception for signal application to help narrow down the source of the exception"
   [system computation-stage throwable]
-  (let [message #?(:clj (.getMessage throwable)
+  (let [message #?(:clj (.getMessage ^java.lang.Throwable throwable)
                    :cljs (. throwable -message))]
     (if (some->> message (re-find #"^:donut.system"))
       ;; let donut.system exceptions flow through
